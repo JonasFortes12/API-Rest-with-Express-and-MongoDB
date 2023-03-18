@@ -5,7 +5,8 @@ const port = 3000
 const routes = {
     '/' : 'Main Page - Library',
     '/books' : 'Books page',
-    '/authors' : 'Authors page'
+    '/authors' : 'Authors page',
+    '/about' : 'Infos about the project'
 
 }
 
