@@ -1,5 +1,6 @@
 import express from "express"
 import db from "./config/dbConnect.js"
+import books from "./models/Book.js"
 
 //DB events listeners:
 db.on("error", () => {
@@ -12,19 +13,15 @@ db.once("open", () =>{
 const app = express()
 app.use(express.json())
 
-const books = [
-    {id: 1, "title" : "Quincas Borba"},
-    {id: 2, "title" : "The death of Ivan Ilitch"}
-
-]
-
 
 app.get('/', (req, res) =>{
     res.status(200).send('Library Universal')
 })
 
-app.get('/books', (req, res) => {
-    res.status(200).json(books)
+app.get('/books', async (req, res) => {
+    
+    res.status(200).json(await books.find())
+
 })
 
 app.get('/books/:id', (req, res) => {
