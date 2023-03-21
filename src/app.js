@@ -1,6 +1,7 @@
 import express from "express"
 import db from "./config/dbConnect.js"
 import books from "./models/Book.js"
+import routes from "./routes/index.js"
 
 //DB events listeners:
 db.on("error", () => {
@@ -13,16 +14,10 @@ db.once("open", () =>{
 const app = express()
 app.use(express.json())
 
+routes(app);
 
-app.get('/', (req, res) =>{
-    res.status(200).send('Library Universal')
-})
 
-app.get('/books', async (req, res) => {
-    
-    res.status(200).json(await books.find())
-
-})
+// The routes under will be moved to yours respectives routes files: 
 
 app.get('/books/:id', (req, res) => {
     let index = getBookId(req.params.id)
