@@ -25,10 +25,6 @@ app.get('/books/:id', (req, res) => {
     // res.status(200).json(books[req.params.id - 1])
 })
 
-app.post('/books', (req, res) => {
-    books.push(req.body)
-    res.status(201).send('Book added successfully')
-})
 
 app.put(`/books/:id`, (req, res) => {
     let index = getBookId(req.params.id)
