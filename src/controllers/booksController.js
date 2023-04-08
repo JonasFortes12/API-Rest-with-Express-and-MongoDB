@@ -4,7 +4,11 @@ class BookController {
 
     static getAllBooks = async (req, res) =>{        
         try {
-            res.status(200).json(await books.find())
+            res.status(200).json(
+                await books.find()
+                .populate('author')
+                .exec()
+            )
         } catch (err) {
             res.status(500).send({message: err.message})
         }
@@ -13,7 +17,11 @@ class BookController {
     static getBookById = async (req, res) => {
         const id = req.params.id
         try {
-            res.status(200).send(await books.findById(id))
+            res.status(200).send(
+                await books.findById(id)
+                .populate('author', 'name')
+                .exec()
+            )
         } catch (err) {
             res.status(400).send({message: `${err.message} - Book don´t located by ID!`})
         }
