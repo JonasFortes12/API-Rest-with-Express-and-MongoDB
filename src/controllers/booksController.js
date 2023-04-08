@@ -61,6 +61,18 @@ class BookController {
         }
     }
 
+    static getBookByPublishingCompany = async (req, res) => {
+        const publishingCompany = req.query.publishingCompany
+
+        try {
+            res.status(200).send(
+                await books.find({'publishingCompany' : publishingCompany})
+            )
+        } catch (err) {
+            res.status(500).send({message: err.message})
+        }
+    }
+
 
 }
 
